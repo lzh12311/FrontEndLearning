@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .selected {
+            color: blue;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<script src="./vue.js"></script>
+<div id="app">
+    <ul>
+        <template v-for="item in items" :key="item.id">
+            <li @click="selectedId = item.id" :class="{selected: selectedId === item.id}">
+                {{ item.message }}
+            </li>
+            <img :src="item.img" alt="">
+        </template>
+        
+    </ul>
+    <ul>
+        <li v-for="(value, name, index) in object">
+          {{ value }}-{{name}}-{{index}}
+        </li>
+    </ul>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                selectedId: 0,
+                items: [
+                    {id: 0, message: '西瓜', img: './watermelon.png'},
+                    {id: 1, message: '苹果', img: './apple.png'},
+                    {id: 2, message: '香蕉', img: './banana.png'}
+                ],
+                object: {
+                    name: 'allen',
+                    age: '18',
+                    sex: '男'
+                }
+            }
+        },
+        mounted() {
+            // this.items[0] = { id: 0, message: '菠萝' }
+          
+
+            // 使用包装的数组的方法，对原数据进行操作
+            // this.items.shift()
+            // this.items.unshift({ id: 0, message: '菠萝' })
+            // console.log(this.items)
+
+            // 对数组整体进行深拷贝，修改数据后在整体重新赋值
+            // const newItems = JSON.parse(JSON.stringify(this.items))
+            // newItems[0] = { id: 0, message: '菠萝' }
+            // this.items = newItems
+            // console.log(this.items)
+
+            // this.object.description = 'web讲师'
+            // this.object.name = 'kevin'
+            // 对于对象属性的添加通过vue.set()
+            Vue.set(this.object, 'description', 'web讲师')
+        }
+    })
+</script>
+</html>

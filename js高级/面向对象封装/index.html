@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,body {
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    li {
+      padding: 10px 20px;
+      list-style: none;
+      border-top: 1px solid #000;
+      border-left: 1px solid #000;
+      border-bottom: 1px solid #000;
+    }
+    li:last-child {
+      border-right: 1px solid #000;
+    }
+    li.active {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <ul id="tabs"></ul>
+  </div>
+  <script>
+    var tabs = document.getElementById('tabs')
+
+    const arr = ['标签1', '标签2', '标签3']
+    arr.forEach(function (v) {
+      var li = document.createElement('li')
+      li.innerHTML = v
+      tabs.appendChild(li)
+    })
+
+    tabs.onclick = function (ev) {
+      var ev = ev || window.event;
+      var target = ev.target || ev.srcElement;
+      if(target.nodeName.toLowerCase() == 'li') {
+        arr.forEach(function (v, index) {
+          tabs.children[index].setAttribute('class', '')
+        })
+        target.setAttribute('class', 'active')
+      }
+    }
+
+    // function Tabs (arr, id) {
+    //   this.tabs = document.getElementById(id)
+    //   this.arr = arr
+    //   this.init = function () {
+    //     var tabs = this.tabs
+    //     arr.forEach(function (v) {
+    //       console.log(this.tabs)
+    //       var li = document.createElement('li')
+    //       li.innerHTML = v
+    //       tabs.appendChild(li)
+    //     })
+    //     this.tabs.onclick = function (ev) {
+    //       var ev = ev || window.event;
+    //       var target = ev.target || ev.srcElement;
+    //       if(target.nodeName.toLowerCase() == 'li') {
+    //         arr.forEach(function (v, index) {
+    //           tabs.children[index].setAttribute('class', '')
+    //         })
+    //         target.setAttribute('class', 'active')
+    //       }
+    //     }
+    //   }
+    // }
+    // var tabs = new Tabs(['标签1', '标签2', '标签3'], 'tabs')
+    // tabs.init()
+
+    // var obj = {}
+    // obj.name = 'allen'
+
+    // var obj1 = {}
+    // obj1.name = 'jason'
+
+    // function createCar (color, style) {
+    //   var obj = new Object()
+    //   obj.color = color
+    //   obj.style = style
+    //   return obj
+    // }
+
+    // var Cayenne = createCar('red', '卡宴')
+    // var C911 = createCar('blue', '911')
+
+      function CreateCarA (color, style) {
+        this.color = color
+        this.style = style
+      }
+
+      function CreateCarB (color, style) {
+        this.color = color
+        this.style = style
+      }
+
+      CreateCarA.prototype.configure = '顶配'
+      CreateCarB.prototype = CreateCarA.prototype
+      
+      var Cayenne = new CreateCarA('red', '卡宴')
+      var C911 = new CreateCarA('blue', '911')
+
+      var A = new CreateCarB('red', '520')
+      var B = new CreateCarB('blue', '320')
+
+      // console.log(Cayenne, C911)
+
+      // var obj = {}
+      // var arr = []
+      // console.log(obj instanceof Object)
+      // console.log(arr instanceof Array)
+      // console.log(Cayenne instanceof CreateCar)
+      // Cayenne.constructor
+      // console.log(obj.constructor === Object, '11')
+      // console.log(Cayenne.constructor === CreateCar)
+      
+  </script>
+</body>
+</html>

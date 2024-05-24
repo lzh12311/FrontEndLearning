@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组解构赋值</title>
+</head>
+
+<body>
+  <script>
+    // let arr = [1, 2, 3]
+
+    // let first = arr[0]
+
+    // console.log(first);
+    // let [a, b, c] = [1, 2, 3]
+    // console.log(a)
+
+    // let [foo, [[bar], baz]] = [1, [[2], 3]];
+    // console.log(foo);
+    // console.log(bar);
+    // console.log(baz);
+
+    // let [, , third] = ["foo", "bar", "baz"];
+    // console.log(third) // "baz"
+
+    // let [head, ...tail] = [1, 2, 3, 4];
+
+    // console.log(head);
+    // console.log(tail);
+
+    // // let [foo] = [];
+    // // console.log(foo)
+    // let [bar, foo] = [1];
+
+    // console.log(foo)
+
+    // const items = [
+    //   ['name', '张三'],
+    //   ['title', 'Author']
+    // ];
+
+    // items.forEach(([key, value]) => console.log(key, value))
+
+    // items.forEach(function ([key, value]) {
+    //   console.log(key, value)
+    // })
+
+    // let person = {
+    //   name: '曹操',
+    //   age: 40
+    // }
+
+    // let { name, age } = person
+
+    // console.log(name);
+    // console.log(age);
+
+    // let [ ...tail,head] = [1, 2, 3, 4];
+
+    // let { bar, foo } = { foo: 'aaa', bar: 'bbb' };
+    // console.log(foo);
+
+    // let { bar: fo } = { bar: 'baz' };
+
+    // console.log(fo);
+
+    // let obj = {
+    //   p: [
+    //     'Hello',
+    //     { y: 'World' }
+    //   ]
+    // };
+    // let { p: [x, { y }] } = obj;
+
+    // console.log(x, y);
+
+    // const obj1 = {};
+    // const obj2 = { foo: 'bar' };
+    // // Object.setPrototypeOf(obj1, obj2);
+    // obj1.__proto__ = obj2
+    // const { foo } = obj1;
+    // console.log(foo);
+
+    // var { x = 3 } = {}; x // 3
+    // var { x, y = 5 } = { x: 1 }; x // 1y // 5
+    // var { x: y = 3 } = {}; y // 3
+    // var { x: y = 3 } = { x: 5 }; y // 5
+    // var { message: msg = 'Something went wrong' } = {};
+    // msg // "Something went wrong"
+    // // 默认值生效的条件是，对象的属性值严格等于undefined。
+    // var { x = 3 } = { x: undefined }; x // 3
+    // var { x = 3 } = { x: null };
+
+    // console.log(x);
+
+    let private = Symbol('private')
+    var obj = {
+      _name: '张三',
+      [private]: '私有的属性',
+      say: function () {
+        console.log(this[private])
+      }
+    }
+
+    console.log(Object.keys(obj))
+    console.log(obj.say(),111)
+
+
+    let a = { a: 1 }
+    let b = { b: 2 }
+    let c = {}
+    c[b] = a.a;
+    c[a] = b.b
+    console.log(c)
+    let jsonData = {
+  id: 42,
+  status: "OK",
+  data: [867, 5309]
+};
+    let { id, status, data: number } = jsonData;
+console.log(id, status, number);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./vue.js"></script>
+    <div id="app">
+
+        <!-- <div
+            class="static"
+            v-bind:class="{ active: true, 'text-danger': false }"
+            ></div> -->
+
+        <div :class="classObject"></div>
+        <button @click="setActive">修改class</button>
+        <div v-bind:class="{ active: isActive, 'text-danger': hasError }"></div>
+
+        <div v-bind:class="['activeClass', 'errorClass']"></div>
+        <button @click="change">修改</button>
+        <button @click="setActive">setActive</button>
+        <!-- <div v-bind:class="[{ active: isActive }, 'text-danger']"></div> -->
+        <!-- <test class="container" /> -->
+
+        <!-- <div v-bind:style="{ color: 'red', fontSize: 30 + 'px' }"></div> -->
+    </div>
+    <script>
+        const cp1 = {
+            template: '<div><p>我是一个组件</p></div>'
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                test: cp1
+            },
+            data() {
+                return {
+                    isActive: true,
+                    hasError: true,
+                    classObj: {
+                        isaAtive: false,
+                        item: true
+                    }
+                }
+            },
+            methods: {
+                setActive() {
+                    this.classObj.isaAtive = !this.classObj.isaAtive
+                    this.isActive = !this.isActive
+                },
+                change() {
+                    this.isActive = !this.isActive
+                }
+            },
+            computed: {
+                classObject: function () {
+                    return {
+                        active: this.isActive && !this.hasError,
+                        'text-danger': this.hasError && this.hasError.type === 'fatal'
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

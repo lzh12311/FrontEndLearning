@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="https://t7.baidu.com/it/u=4198287529,2774471735&fm=193&f=GIF" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>
+    <script>
+        axios({
+            methods: 'get',
+            url: 'http://localhost:3000/api/getData',
+            headers: {
+                token: 1
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // new Promise((resolve, reject) => { resolve('hello world') }).then(val => {  console.log(val) })
+    // new Promise((resolve, reject) => {
+    //   reject('bad code')
+    // }).catch(function (err) {
+    //   console.log(err)
+    // })
+
+    // new Promise((resolve, reject) => {
+    //   // reject('bad code')
+    //   resolve('hello world')
+    // }).finally(() => {
+    //   console.log('promise状态变更')
+    // })
+
+    // 思考题：在不使用Promise的情况下，如果实现一个计数器将输入的2个数字相加，在间隔1s后，将所得结果再进行下一次计算
+    // function counter(x, y, wait, cb) {
+    //   setTimeout(function () {
+    //     cb(x + y)
+    //   }, 1000)
+    // }
+    // counter(1, 2, 1000, function(num) {
+    //   console.log(num)
+    //   counter(num, 1, 1000, function (num) {
+    //     console.log(num)
+    //   })
+    // })
+
+
+    // function counter(x, y, wait) {
+    //   return new Promise(function (resolve, reject) {
+    //     setTimeout(function () {
+    //       resolve(x + y)
+    //     }, 1000)
+    //   })
+    // }
+
+    // counter(1, 2, 1000).then(val => {
+    //   console.log(val)
+    //   return counter(val, 1, 1000)
+    // }).then(num => {
+    //   console.log(num)
+    // })
+
+    // Promise.resolve(2).then((val) => {
+    //   console.log(val)
+    // })
+
+    // Promise.reject({ message: '接口返回错误' }).catch((err) => {
+    //   console.log(err)
+    // })
+
+
+    // const promise1 = Promise.resolve(3);
+    // const promise2 = 42;
+    // const promise3 = new Promise((resolve, reject) => {
+    //   setTimeout(() => { 
+    //     resolve('hello')
+    //   }, 1000);
+    // });
+    // const promise4 = new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve('world')
+    //   }, 2000);
+    // });
+
+    // Promise.all([promise1, promise2, promise3, promise4]).then((values) => {
+    //   console.log(values);
+    // });
+
+    // function fn () {
+    //   return new Promise((resolve) => {
+    //     console.log('Promise1')
+    //     fn1()
+    //     setTimeout(() => {
+    //       console.log('Promise2')
+    //       resolve()
+    //       console.log('Promise3')
+    //     }, 0);
+    //   })
+    // }
+    // async function fn1() {
+    //   var p = Promise.resolve().then(() => {
+    //     console.log('Promise6')
+    //   })
+    //   await p.then(() => {
+    //     console.log('Promise7')
+    //   })
+    //   console.log('end')
+    // }
+    // console.log('script')
+    // setTimeout(() => {
+    //   console.log('setTimeout')
+    // }, 0)
+    // fn().then(() => {
+    //   console.log('Promise4')
+    // })
+
+    // script
+    // Promise1
+    // Promise6
+    // Promise7
+    // end
+    // setTimeout
+    // Promise2
+    // Promise3
+    // Promise4
+
+    // 异步
+    // 宏任务
+    // setTimeout
+    //console.log('Promise2')
+    //resolve()
+    //console.log('Promise3')
+
+    // 微任务
+    // Promise6
+    // Promise4
+
+    // var b = {a: 1}
+    // function a () {}
+    // a.prototype = Object.create(b)
+
+
+    var A = function () {
+        this.name = "allan";
+        this.age = 23;
+    };
+    var d = new A();
+    var c = Object.create(d);
+
+
+
+  </script>
+</body>
+</html>

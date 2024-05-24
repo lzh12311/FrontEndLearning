@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let p = new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         resolve('success')
+        //     }, 1000)
+        //     // reject('error')
+        // })
+        // console.log( p.then(data => {
+        //     console.log(data)
+        //     return data
+        // }))
+        // .then(val => {
+        //     console.log(val, '第二个then的结果')
+        // })
+
+
+        // 手写promise的方法
+        class MPromise {
+            constructor(callback) {
+                // 成功的参数
+                this.value = undefined
+                // 失败的参数
+                this.reason = undefined
+                // 定义promise的状态
+                this.state = 'pending'
+                // 定义一个数组，存放异步任务
+                this.onResolveCallback = []
+                this.onRejectCallback = []
+
+                const resolve = (val) => {
+                    if (this.state === 'pending') {
+                        this.value = val
+                        this.state = 'fulfilled'
+                        this.onResolveCallback.forEach(fn => fn())
+                    }
+                    
+                }
+                const reject = (val) => {
+                    if (this.state === 'pending') {
+                        this.reason = val
+                        this.state = 'rejected'
+                        this.onRejectCallback.forEach(fn => fn())
+                    }
+                }
+                callback(resolve, reject)
+            }
+            then(onFulfilled, onRejected) {
+                return new MPromise((resolve, reject) => {
+                    // 容错处理，判断参数是否为函数
+                    const onFulfilledState = onFulfilled ? typeof onFulfilled === 'function' : true
+                    const onRejectedState = onRejected ? typeof onRejected === 'function' : true
+                    if (onFulfilledState && onRejectedState) {
+                        if (this.state === 'fulfilled') {
+                            resolve(onFulfilled(this.value))
+                        }
+                        if (this.state === 'rejected') {
+                            try {
+                                if (!onRejected) {
+                                    reject(onFulfilled(this.reason))
+                                } else {
+                                    reject(onRejected(this.reason))
+                                }
+                            } catch(err) {
+                                console.log(err)
+                            }
+                            
+                        }
+                        if (this.state === 'pending') {
+                            this.onResolveCallback.push(() => {
+                                resolve(onFulfilled(this.value))
+                            })
+                            this.onRejectCallback.push(() => {
+                                if (!onRejected) {
+                                    reject(onFulfilled(this.reason))
+                                } else {
+                                    reject(onRejected(this.reason))
+                                }
+                            })
+                        }
+                    }
+                })
+      
+            }
+            static resolve(value) {
+                return new MPromise((resolve, reject) => resolve(value))
+            }
+            static reject(reason) {
+                return new MPromise((resolve, reject) => reject(reason))
+            }
+            static all(promise) {
+               return new MPromise((resolve, reject) => {
+                  // 存储promise的结果
+                  const results = []
+                  let count = 0 
+                  promise.forEach((item, index) => {
+                    // 获取到每个promise然后执行
+                    item.then(value => {
+                        results[index] = value
+                        count++
+                        if (count === promise.length) {
+                            resolve(results)
+                        }
+                    })
+                  })
+               })
+            }
+        }
+        // const p1 = new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         reject(1)
+        //     }, 1000)
+        // })
+
+        // const p2 = new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         resolve(2)
+        //     }, 2000)
+        // })
+
+        // Promise.all([p1, p2]).then(res => {
+        //     console.log(res)
+        // })
+
+        // MPromise.resolve(1).then(res => {
+        //     console.log(res + 'resolve的结果')
+        // })
+        
+        // MPromise.reject(1).then(res => {
+        //     console.log(res)
+        // })
+
+
+        const p1 = new MPromise((resolve, reject) => {
+            setTimeout(() => {
+                reject(1)
+            }, 1000)
+        })
+        const p2 = new MPromise((resolve, reject) => {
+            setTimeout(() => {
+                reject(1)
+            }, 2000)
+        })
+        MPromise.all([p1, p2]).then(res => {
+            console.log(res)
+        })
+
+
+        // const p = new MPromise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         resolve('success')
+        //     }, 1000)
+        // })
+        // p.then((val) => {
+        //     console.log(val)
+        // }).then(() => {
+        //     console.log('第二次then的打印')
+        // })
+
+
+    </script>
+</body>
+</html>

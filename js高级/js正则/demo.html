@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <style>
+        .box {
+            border-radius: 15px;
+            background-clip: padding-box;
+            margin: 180px auto;
+            width: 350px;
+            padding: 35px 35px 15px 35px;
+            background-color: #fff;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 0 25px #cac6c6;
+        }
+        .box label {
+            display: inline-block;
+            width: 60px;
+        }
+        .box input {
+            width: 260px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 5px;
+            border: 1px solid #b4bccc;
+            padding-left: 10px;
+            outline: none;
+        }
+        .box .group {
+            margin-bottom: 20px;
+        }
+        h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+        .btn {
+            width: 70px;
+            height: 40px;
+            border: none;
+            background-color: #409EFF;
+            line-height: 16px;
+            text-align: center;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .btn-box {
+            text-align: center;
+        }
+        #message {
+            margin-left: 60px;
+            color: red;
+            font-size: 13px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h3>登录窗口</h3>
+        <div class="group">
+            <label>用户名</label>
+            <input id="userName" placeholder="用户名" />
+            <p id="message"></p>
+        </div>
+        <div class="group">
+            <label>密码</label>
+            <input id="password" type="password" placeholder="用户名" />
+        </div>
+        <div class="btn-box">
+            <button class="btn">登录</button>
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios@0.25.0/dist/axios.min.js"></script>
+    <script>
+        const userName = document.getElementById('userName')
+        const message = document.getElementById('message')
+
+        userName.addEventListener('input',function () { 
+            var str = checkUserName(userName.value)
+            // 户名只能为英文字母，数字，下划线或者短横线组成,，并且用户名长度为 6~16位
+            if (str === '该用户名合法') {
+                message.innerHTML = ''
+                //  ajax请求，模拟异步操作
+                // axios.get('http://www.baidu.com', function () {})
+            } else {
+                message.innerHTML = str
+            }
+        })
+        function checkUserName (value) {
+             var message = "该用户名合法";
+            return message;
+        }
+    </script>
+</body>
+</html>

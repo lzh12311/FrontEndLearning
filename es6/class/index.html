@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // function Person ({ name, age=18 }) {
+    //   this.name = name
+    //   this.age = age
+    // }
+    // console.log(new Person({name: '张三'}), 'func')
+
+    // class Person {
+    //   constructor ({ name, age=18 }) {
+    //     this.name = name
+    //     this.age = age
+    //   }
+    // }
+    // console.log(new Person({name: '张三'}), 'class')
+
+    // console.log(typeof class A {})
+
+    // class A {}
+    // console.log(A.prototype.constructor === A)
+
+    // class A {}
+    // var a = new A()
+    // console.log(a.constructor === A)
+
+
+    // class A {
+    //   fn () {}
+    //   toString() {}
+    // }
+
+    // var a = new A()
+
+    // class A {
+    //   // constructor () {
+    //   //   this.name = 'a'
+    //   //   console.log(1)
+    //   // }
+    // }
+    // console.log(new A())
+    // A()
+
+    // class Logger {
+    //   printName(name = 'world') {
+    //     console.log(this, 'this')
+    //     this.print(`Hello ${name}`)
+    //   }
+    //   print(text) {
+    //     console.log(text)
+    //   }
+    // }
+
+    // class Logger {
+    //   printName = (name = 'world') => {
+    //     console.log(this, 'this')
+    //     this.print(`Hello ${name}`)
+    //   }
+    //   print = (text) => {
+    //     console.log(text)
+    //   }
+    // }
+
+    // class Logger {
+    //   constructor () {
+    //     this.printName = this.printName.bind(this)
+    //   }
+    //   printName (name = 'world') {
+    //     console.log(this, 'this')
+    //     this.print(`Hello ${name}`)
+    //   }
+    //   print = (text) => {
+    //     console.log(text)
+    //   }
+    // }
+
+    // var { printName } = new Logger
+    // printName()
+
+    // class A {
+    //   get name () {
+    //     return '1'
+    //   }
+    //   set name (value) {
+    //     console.log('setter:'+value)
+    //   }
+    // }
+
+    // var a = new A()
+    // let methodName = 'test'
+    // class A {
+    //   [methodName] () {}
+    // }
+
+    // var a = new A()
+
+    // function fn () {}
+    // fn.a = 1
+    // fn.b = function () {}
+
+    // var f = new fn()
+
+    // class A {
+    //   static fn () {
+    //     this.getValue()
+    //   }
+    //   static getValue () {
+    //     console.log('张三')
+    //   }
+    //   getValue() {
+    //     console.log('李四')
+    //   }
+    // }
+
+    // var a = new A()
+    // A.getValue()
+    // a.getValue()
+
+    // class A {
+    //   a = 1
+    //   b = 'SUCCESS'
+    // }
+    // var a = new A()
+    // 等价
+    // class A {
+    //   constructor () {
+    //     this.a = 1
+    //     this.b = 'SUCCESS'
+    //   }
+    // }
+
+    // class F {
+    //   money = '100w'
+    //   fn () {}
+    // }
+    // class S extends F{
+    // }
+
+    // console.log(new S())
+
+    // class F {
+    //   money = '100w'
+    //   fn () {}
+    // }
+    // class S extends F{
+    //   constructor () {
+    //     super()
+    //   }
+    // }
+
+    // console.log(new S())
+
+    // class F {
+    //   constructor (sMoney) {
+    //     this.money = 100 + sMoney
+    //   }
+    //   fn () {}
+    // }
+    // class S extends F{
+    //   constructor (money) {
+    //     // 在super调用前子类是没有this，如果使用会报错
+    //     super(money)
+
+    //   }
+    // }
+    // console.log(new S(10))
+
+
+    class F {
+      money = '100w'
+      fn () {}
+    }
+    class S extends F{
+      constructor () {
+        super()
+        this.name = 'son'
+      }
+      fn1() {}
+    }
+
+    var s = new S()
+
+    console.log(S.prototype.__proto__ === F.prototype)
+  </script>
+</body>
+</html>

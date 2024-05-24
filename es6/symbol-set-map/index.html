@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>symbol</title>
+</head>
+
+<body>
+  <script>
+    // let s = Symbol()
+    // console.log(typeof s);
+
+    // let a = { a: 1 }
+    // let b = { b: 1 }
+    // let c = {}
+    // c[a] = 3
+    // c[b] = 4
+    // console.log(c);
+
+    // let s1 = Symbol('s')
+    // let s2 = Symbol('s')
+
+    // console.log(s1 === s2)
+
+    // let a = { a: 1 }
+    // let b = { b: 1 }
+
+    // let s1 = Symbol(a)
+    // let s2 = Symbol(b)
+
+    // let o = {}
+    // o[s1] = 1
+    // o[s2] = 2
+
+    // console.log(o);
+
+    // const objectSymbols = Object.getOwnPropertySymbols(o);
+    // console.log(objectSymbols)
+
+    // let sym = Symbol('My symbol');
+    // "your symbol is " + sym
+
+    let private = Symbol('private')
+    var obj = {
+      _name: '张三',
+      [private]: '私有的属性',
+      say: function () {
+        console.log(this[private])
+      }
+    }
+    //Symbole不可被枚举。
+    console.log(Object.keys(obj))
+  </script>
+</body>
+
+</html>

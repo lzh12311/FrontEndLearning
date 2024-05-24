@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .product {
+            border: 1px solid #000;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<script src="./vue.js"></script>
+<div id="app">
+    <!-- <div>
+        <button @click="counter = counter + 1">Add 1</button>
+        <p>click {{ counter }} times</p>
+
+        <button @click="handleClick">点击</button>
+    </div> -->
+    <div class="product" @click="selectProduct($event, product)" v-for="product in productList" :key="product.id">
+        <p>商品名称：{{product.name}}</p>
+        <p>商品价格：{{product.price}}</p>
+        <p>商品价格：{{product.price}}</p>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                counter: 0,
+                productList: [
+                    {
+                        id: 0,
+                        name: '哇哈哈',
+                        price: 2
+                    },
+                    {
+                        id: 1,
+                        name: '百事可乐',
+                        price: 3.5
+                    },
+                    {
+                        id: 2,
+                        name: '红牛',
+                        price: 6
+                    }
+                ]
+            }
+        },
+        methods: {
+            handleClick() {
+                alert('今天是个好天气！')
+            },
+            selectProduct(e, product) {
+                console.log(e, '事件对象')
+                console.log(product, 'product')
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        function renderer(vnode, container) {
+            // 判断当前的tag的类型，如果是对象，说明vnode tag描述的是组件
+            if (typeof vnode.tag === 'string') {
+                mountElement(vnode, container)
+            } else if (typeof vnode.tag === 'object') {
+                // vnode.tag是组件对象，调用它的render函数得到组件的渲染内容（虚拟 DOM）
+                const subtree = vnode.tag.render()
+                renderer(subtree, container)
+            }
+        }
+
+        function mountElement(vnode, container) {
+            // 使用vnode.tag作为标签名称创建 DOM 元素
+            const el = document.createElement(vnode.tag)
+            // 遍历 vnode.props，将属性 事件添加到 DOM 元素
+            for (const key in vnode.props) {
+                if (/^on/.test(key)) {
+                    // 如果key以on开头，说明它是事件
+                    el.addEventListener(
+                        // 事件名称 onClick 转为 click
+                        key.substr(2).toLowerCase(),
+                        vnode.props[key] // 事件处理函数
+                    )
+                }
+            }
+
+            // 处理 children
+            if (typeof vnode.children === 'string') {
+                // 如果 children 是字符串，说明它是元素的文本子节点
+                el.appendChild(document.createTextNode(vnode.children))
+            } else if (Array.isArray(vnode.children)) {
+                // 递归地调用 renderer 函数渲染子节点，使用当前元素 el 作为挂载点
+                vnode.children.forEach(child => renderer(child, el))
+            }
+
+            // 将元素添加到挂载点下
+            container.appendChild(el)
+        }
+
+        const container = document.getElementById('app')
+        const MyComponent = {
+            render() {
+                return {
+                    tag: 'div',
+                    props: {},
+                    children: [
+                        {
+                            tag: 'p',
+                            props: {},
+                            children: '我是一个p标签'
+                        },
+                        {
+                            tag: 'button',
+                            props: {
+                                onClick: () => alert('hi vue')
+                            },
+                            children: '按钮'
+                        }
+                    ]
+                }
+            }
+        }
+
+        const vnode = {
+            tag: MyComponent
+        }
+
+        renderer(vnode, container)
+    </script>
+</body>
+</html>

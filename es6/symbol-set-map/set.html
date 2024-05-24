@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>set</title>
+</head>
+
+<body>
+  <script>
+    // const s = new Set([1, 2, 3, 4, 2])
+    // console.log(s);
+
+    // console.log(typeof s) // 
+
+
+    // let set = new Set([1, 2, 3, 4])
+    // let res = set instanceof Set
+    // let obj = {}
+    // let resObj = Object.prototype.toString.call(obj)
+    // let resSet = Object.prototype.toString.call(set)
+    // console.log(res); // true
+    // console.log(resSet); // [object Set]
+    // console.log(resObj); // [object Object]
+
+
+    // const set = new Set([1, 2, 3, 4, 4]);
+
+    // console.log([...set]);
+
+    // console.log(Array.from(set))
+
+
+    // let set = new Set();
+    // let a = 5;
+    // let b = '5';
+    // set.add(a);
+    // set.add(b);
+    // console.log(Array.from(set))
+
+    // let set = new Set();
+    // let a = NaN;
+    // let b = NaN;
+    // set.add(a);
+    // set.add(b);
+
+    // console.log(Array.from(set))
+
+
+    let set = new Set([1, 4, 9]);
+    set.forEach((value, key) => console.log(key + ' : ' + value))
+
+    let arr1 = [1, 2, 3]
+    let arr2 = [4, 3, 2]
+    let a = new Set(arr1);
+    let b = new Set(arr2);
+
+
+    console.log([...a])
+
+    let intersect = new Set([...a].filter(x => b.has(x)));
+    // set {2, 3}
+
+    console.log([...intersect])
+    
+  </script>
+</body>
+
+</html>

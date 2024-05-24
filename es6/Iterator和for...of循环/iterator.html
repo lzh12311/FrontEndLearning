@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iterator</title>
+</head>
+
+<body>
+  <script>
+    var arr = ['1', '2']
+    console.log(arr)
+
+    var iter = arr[Symbol.iterator]()
+    console.log(iter)
+    console.log(iter.next())
+    console.log(iter.next())
+    console.log(iter.next())
+    // var it = makeIterator(arr)
+    // console.log(it.next());
+    // console.log(it.next());
+    // console.log(it.next());
+    // // {
+    // //   value: '1', done: false
+    // // }
+    // function makeIterator(arr) {
+    //   var nextIndex = 0
+    //   return {
+    //     next: function () {
+    //       return nextIndex < arr.length ? {
+    //         value: arr[nextIndex++], done: false
+    //       } : {
+    //         value: undefined, done: true
+    //       }
+    //     }
+    //   }
+    // }
+    // 你去部署 迭代器接口 然后实现 ...obj
+    let obj = {
+      data: ['hello', 'world'],
+      [Symbol.iterator]() {
+        const self = this;
+        let index = 0;
+        return {
+          next() {
+            if (index < self.data.length) {
+              return {
+                value: self.data[index++], done: false
+              }
+            } else {
+              return {
+                value: undefined, done: true
+              }
+            }
+          }
+        }
+      }
+    }
+    console.log(...obj)
+
+    var arr = [1, 2, 3, 4, 5]
+    for (var i = 0; i < arr.length; i++) {
+      console.log(arr[i])
+    }
+
+    console.log(i)
+  </script>
+</body>
+
+</html>

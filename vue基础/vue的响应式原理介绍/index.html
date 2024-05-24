@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="input" />
+    <p><span>输入的内容</span><span id="textInput"></span></p>
+    <button id="btn">>重制函数</button>
+    <script>
+        const input = document.getElementById("input")
+        const inputText = document.getElementById("textInput")
+        const button = document.getElementById("btn")
+
+
+        input.addEventListener('input', function (e) {
+            data.inputText = e.target.value;
+        });
+
+        btn.addEventListener('click', function (e) {
+            data.inputText = "重制数据"
+        });
+
+        const data = {
+            inputText: ""
+        };
+
+        Object.keys(data).forEach(key => defineReactive(data, key, data[key]))
+        
+        //定义响应式处理的函数
+        function defineReactive(data, key, value) {
+            Object.defineProperty(data, key, {
+                get() {
+                    return value
+                },
+                set(val) {
+                    inputText.innerText = val
+                    value = val
+                    input.value = val
+                }
+            })
+        }
+
+
+
+    </script>
+    <!-- <input id="input" />
+    <p><span>输入框的内容:</span><span id="inputText"></span></p>
+    <button id="btn">重置数据</button>
+    <script>
+        
+
+        // 获取input button span标签
+        const input = document.getElementById('input')
+        const inputText = document.getElementById('inputText')
+        const btn = document.getElementById('btn')
+
+        // 给input绑定input事件
+        input.addEventListener('input', function (e) {
+            data.inputText = e.target.value
+        })
+
+        // 给button绑定click事件
+        btn.addEventListener('click', function () {
+            data.inputText = '重置数据'
+        })
+
+        // 响应式数据
+        const data = {
+            inputText: ''
+        }
+
+        Object.keys(data).forEach(key => defineReactive(data, key, data[key]))
+
+        // 定义响应式处理函数
+        function defineReactive(data, key, value) {
+            Object.defineProperty(data, key, {
+                get() {
+                    return value
+                },
+                set(val) {
+                    inputText.innerText = val
+                    value = val
+                    input.value = val
+                }
+            })
+        } -->
+
+    <!-- // let it = data.inputText
+
+        // Object.defineProperty(data, 'inputText', {
+        //     get() {
+        //         return it
+        //     },
+        //     set(val) {
+        //         inputText.innerText = val
+        //         it = val
+        //         input.value = val
+        //     }
+        // }) -->
+    </script>
+</body>
+
+</html>

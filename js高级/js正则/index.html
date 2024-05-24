@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // /123/ 匹配内容是否包含有123
+    // var rg = /123/
+    // console.log(rg.test('123'))
+    // console.log(rg.test('1234'))
+    // console.log(rg.test('41234'))
+    // console.log('-----------------------')
+    // // // 匹配包含123开头内容
+    // var rg1 = /^123/
+    // console.log(rg1.test('123'))
+    // console.log(rg1.test('1234'))
+    // console.log(rg1.test('41234'))
+    // console.log('-----------------------')
+    // // // 精确匹配 要求内容必须是123
+    // var rg2 = /^123$/
+    // console.log(rg2.test('123'))
+    // console.log(rg2.test('1234'))
+    // console.log(rg2.test('41234'))
+    // console.log(rg2.test('123123'))
+
+    // 不带边界符
+    // var rg = /[abc]/
+    // rg.test('a')
+    // rg.test('ab')
+    // rg.test('abc')
+    // rg.test('abcd')
+
+    // var rg1 = /^[abc]$/
+    // console.log(rg1.test('a'))
+    // console.log(rg1.test('b'))
+    // console.log(rg1.test('c'))
+    // console.log(rg1.test('ab'))
+    // console.log(rg1.test('abc'))
+    // console.log(rg1.test('abcd'))
+
+    // var rg2 = /[a-z]/ // -表示取某个范围值
+
+    // var rg3 = /[^a-z]/ // ^表示取反
+
+
+    // var rg = /^[a-z]0*$/
+
+    // console.log(rg.test('a0'))
+    // console.log(rg.test('a01'))
+    // console.log(rg.test('a00'))
+    // console.log(rg.test('az00'))
+    // console.log('----------')
+    // var rg1 = /^[a-z]0+$/
+    // console.log(rg1.test('a0'))
+    // console.log(rg1.test('a01'))
+    // console.log(rg1.test('a00'))
+    // console.log(rg1.test('az00'))
+    // console.log('----------')
+    // var rg2 = /^[a-z]0?$/
+    // console.log(rg2.test('a0'))
+    // console.log(rg2.test('a01'))
+    // console.log(rg2.test('a00'))
+    // console.log(rg2.test('az00'))
+    // console.log('----------')
+    // var rg3 = /^[a-z]0{2}$/
+    // console.log(rg3.test('a0'))
+    // console.log(rg3.test('a01'))
+    // console.log(rg3.test('a00'))
+    // console.log(rg3.test('az00'))
+    // console.log('----------')
+    // var rg4 = /^[a-z]0{1,2}$/
+    // console.log(rg4.test('a0'))
+    // console.log(rg4.test('a01'))
+    // console.log(rg4.test('a00'))
+    // console.log(rg4.test('az00'))
+
+
+    // var rg = /^abc{1,3}$/
+    // console.log(rg.test('abcccc'))
+    // var rg1 = /^(abc){1,3}$/
+    // console.log(rg1.test('abcabcabc'))
+
+
+    // var str = 'Aabcdacd'
+    // // var rg = /a/g
+    // console.log(str.match(/a/gi))
+
+    // 要求1：将手机号的中间四位替换成*，例如13877283312变成138****3312
+    // var str = '13877283312'
+    // console.log(str.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'))
+
+    // 要求2：单词首字母转为大写，例如my name is allen, i like code.
+    // var str = 'my name is allen, i like code'
+    // console.log( str.replace(/\b(\w)/g, function (m) {
+    //   console.log(m)
+    //   return m.toUpperCase()
+    // }))
+
+    // 大于0并且不超过两位小数
+  </script>
+</body>
+</html>

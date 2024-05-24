@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function fn () {
+        //     var a = 1
+        //     var b = function () {}
+        // }
+        // var c = 1
+        // fn()
+        // var d = 1
+
+
+        var a = 1;
+        var b = a;
+
+        console.log(a === b) // 1 === 1
+        b = 2;
+        console.log(a === b) // 1 === 2
+        console.log(a);
+        console.log(b);
+
+        // var str = 'hello'
+        // str += 'world'
+
+
+        var str = 'hello world'
+        console.log(str[0] = 'b')
+        str="b"
+        console.log(str) 
+
+
+        // var a = {
+        //     m: 1
+        // };
+        // var b = a;
+        // console.log(a === b)
+        // b.m = 2
+        // console.log(a === b)
+        // console.log(b.m);
+        // console.log(a.m);
+
+
+        // var a = {}
+        // var b = {}
+        // console.log(a == b) 
+
+
+        var person = {
+            province: 'hubei',
+            city: 'wuhan'
+        }
+
+        function getPerson(p, name, age) {
+            p.name = name; 
+            p.age = age;
+            return p;
+        }
+
+        var a = getPerson(person, 'Bob', 10);
+        console.log(str);
+        console.log(a);
+        console.log(person);
+        console.log(a === person); 
+    </script>
+</body>
+</html>

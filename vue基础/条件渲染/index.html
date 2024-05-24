@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<div id="app">
+    <h1 v-if="n===1">v-if</h1>
+    <h2 v-else-if="n===2"></h2>
+    <button @c lick="handleClick">按钮</button>
+    <!-- <h1 v-if="n === 1">hi Vue!</h1> 
+    <div></div>
+    <h2 v-else-if="n === 2">hi Vue!</h2>
+    <h3 v-else>hi Vue!</h3> -->
+    <!-- <template v-if="n == 1">
+        <div>hi vue!</div>
+        <div>hello world</div>
+    </template>
+    <template v-else>
+        <div>hi react!</div>
+        <div>hello world</div>
+    </template> -->
+
+    <!-- <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username" key="username">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" key="email">
+    </template>
+
+    <button @click="handleClick">切换</button> -->
+
+    <!-- <div v-show="n == 1">hi vue</div> -->
+
+    <div v-show="n === 1">1</div>
+    <div v-show="n === 2">2</div>
+</div>
+<script>
+    const data = {
+        n: 1,
+        loginType: 'username'
+    }
+    new Vue({
+        el: '#app',
+        data() {
+            return data
+        },
+        methods: {
+            handleClick() {
+                this.n = 2;
+                console.log(this.n)
+                this.loginType = 'email'
+            }
+        }
+    })
+</script>
+
+</html>

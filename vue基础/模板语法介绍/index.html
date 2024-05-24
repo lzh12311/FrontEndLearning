@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 双打括号 将数据解释为文本，内部支持js表达式 -->
+
+<body>
+    <script src="./vue.js"></script>
+    <div id="app">
+        <div>Message: {{ msg }}</div>
+        <a v-bind:href="href">
+            <div> {{name}}</div>
+        </a>
+        <div>reverseMessage :{{message.split("").reverse().join("")}}</div>
+        <button v-on:click="handleClick">按钮</button>
+        <!-- <div>{{ number + 1 }}</div>
+        <div>{{ ok ? 'yes' : 'no' }}</div>
+        <div>{{ message.split('').reverse().join('') }}</div>
+        <a v-bind:href="href">百度</a>
+        <button v-on:click="handleClick">按钮</button> -->
+    </div>
+    <script>
+        // new Vue({
+        //     el: '#app',
+        //     data() {
+        //         return {
+        //             msg: {
+        //                 a: 1,
+        //                 fn: function() {}
+        //             },
+        //             number: 1,
+        //             ok: true,
+        //             message: 'hello',
+        //             href: 'http://www.baidu.com'
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             this.href = 'http://www.google.com'
+        //         }
+        //     }
+        // })
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    // 转化为了文本格式。
+                    msg: {
+                        a: 1,
+                        fn: function () { }
+                    },
+                    message: "123456",
+                    href: "http://www.baidu.com",
+                    name: "百度"
+                }
+            },
+            methods: {
+                handleClick() {
+                    this.href = "http://google.com"
+                    this.name = "ggogle"
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

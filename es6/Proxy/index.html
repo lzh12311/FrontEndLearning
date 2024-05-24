@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // const target = {}
+
+        // const p = new Proxy(target, handler)
+        // console.log(p)
+        // p.a
+
+        // 创建一个可撤销的代理对象
+        // const data = {}
+        // const obj1 = {
+        //     name: 'allen'
+        // }
+        // const obj2 = {
+        //     name: 'kevin',
+        //     get value () {
+        //         return this.name
+        //     }
+        // }
+
+        // const handler = {
+        //     get (target, property, receiver) {
+        //         /*
+        //         * target 目标对象
+        //         * property 被获取的属性名
+        //         * receiver Proxy 或者继承 Proxy对象
+        //         */
+        //         // console.log(receiver, 'receiver')
+        //         // console.log(p === receiver)
+        //         // console.log(this)
+        //         // console.log(this === handler)
+        //         // console.log(receiver) // obj1
+        //         // return target[property]
+        //         return Reflect.get(target, property, receiver)
+        //     }
+        //     // 方法用于拦截对象的读取属性操作。
+        // }
+        // const { proxy: p, revoke } = Proxy.revocable(obj2, handler)
+        // // 将obj1的原型设置为obj2的代理对象
+        // Object.setPrototypeOf(obj1, p)
+        // console.log(obj1)
+        // console.log(obj1.value)
+
+        // 访问原型链上的属性：Object.create(proxy)[foo]
+        // const data = {
+        //     foo: 1
+        // }
+        // const p = new Proxy(data, {
+        //     get() {
+        //         console.log('触发')
+        //     }
+        // })
+        // const proxy = Object.create(p)
+        // proxy['foo']
+
+        // 3. Reflect.get()
+        // const data = {
+        //     foo: 1
+        // }
+        // const p = new Proxy(data, {
+        //     get() {
+        //         console.log('触发')
+        //     }
+        // })
+        // Reflect.get(p, 'foo')
+
+        // handler.set() 方法是设置属性值操作的捕获器。
+        // const p = new Proxy(target, {
+        // set: function(target, property, value, receiver) {
+        // }
+        // });
+
+        // const data = {
+        //     timeStamp: '1666094400000'
+        // }
+        // const p = new Proxy(data, {
+        //     set (target, property, value, receiver) {
+        //         target[property] = new Date(value).getTime()
+        //         console.log(`当前的时间戳为： ${new Date(value).getTime()}`)
+        //         return true
+        //     }
+        // })
+        // p.timeStamp = '2022-10-19 20:00:00'
+
+        var obj = {
+            say: function () {
+                var f1 = () => {
+                    console.log(this);
+                }
+                f1();
+            },
+            pro: {
+                getPro: () => {
+                    console.log(this);
+                }
+            }
+        }
+        var o = obj.say;
+        o(); // window
+        obj.say(); //obj
+        obj.pro.getPro();// window
+
+        async function fn () {
+    setTimeout(() => {
+        console.log(4)
+    }, 0)
+    Promise.resolve().then(() => {
+        console.log(1)
+    })
+
+    await Promise.resolve().then(() => {
+        console.log(2)
+    })
+
+    console.log(3)
+}
+fn()
+    </script>
+</body>
+
+</html>

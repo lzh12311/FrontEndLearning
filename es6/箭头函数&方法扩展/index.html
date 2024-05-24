@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 传统函数的声明
+    // function fn () {}
+    // var fn = function () {}
+
+    // // 箭头函数
+    // var fn = () => {}
+
+    // // 如果函数内有返回值
+    // var fn = v => v + 1
+    // // 返回值如果不是表达式
+    // var fn = v => ({ obj: v })
+
+    // function fn (v) {
+    //   return { obj: v }
+    // }
+
+    // var fn = v => ({ obj: v })
+
+
+    // var fn = function () {
+    //   return () => { console.log(this.name) }
+    // }
+    // var obj1 = {
+    //   name: '张三'
+    // }
+    // var obj2 = {
+    //   name: '李四'
+    // }
+    // var name = '王五'
+    // obj1.fn = fn
+    // obj2.fn = fn
+    // obj1.fn()()
+    // obj2.fn()()
+    // fn()()
+
+    // var user = {
+    //   name: '张三',
+    //   fn: function () {
+    //     var obj = {
+    //       name: '李四'
+    //     }
+    //     var f = () => this.name
+    //     return f.call(obj)
+    //   }
+    // }
+
+    // console.log(user.fn())
+
+    // var Fn = function () {}
+    // console.log(Fn.prototype, 'prototype')
+
+    // function foo () {
+    //   console.log(arguments)
+    // }
+    // foo(1, 2, 3)
+
+    // var foo = (...arguments) => {
+    //   console.log(arguments)
+    // }
+    // foo(1, 2, 3)
+    // function *fn() {
+    //   yield 1;
+    //   yield 2;
+    //   return 3;
+    // }
+    // var f = fn()
+    // console.log(f)
+    // console.log(f.next())
+    // console.log(f.next())
+    // console.log(f.next())
+
+
+    // var name = 'window'
+    // var obj = {
+    //   name: 'obj',
+    //   methods: () => {
+    //     console.log(this.name)
+    //   },
+    //   fn: function (cb) {
+    //     cb()
+    //   }
+    // }
+    // obj.fn1 = function () {
+    //   obj.fn(() => { console.log(this.name) })
+    // }
+    // var fn1 = obj.fn1
+    // obj.methods()
+    // obj.fn(() => { console.log(this.name) })
+    // fn1()
+    // obj.fn1()
+
+    // window
+    // window
+    // window
+    // obj
+
+    // function fn (x, y) {
+    //   // 短路操作
+    //   y = y || 1
+    //   console.log('合计：' + x + y)
+    // }
+    // fn(1)
+
+    // function fn (x, y = 1) {
+    //   console.log('合计：' + x + y)
+    // }
+    // fn(1)
+
+    // function fn ({ x, y = 1 }) {
+    //   console.log('合计：' + x + y)
+    // }
+    // fn({ x: 1 })
+
+    // function m1({x = 0, y = 0} = {}) {
+    //   return [x, y];
+    // }
+    // function m2({x, y} = { x: 0, y: 0 }) {
+    //   return [x, y];
+    // }
+    // console.log(m1()) // [0, 0]
+    // console.log(m2()) // [0, 0]
+    // console.log(m1({x: 3})) // [3, 0]
+    // console.log(m2({x: 3})) // [3, undefined]
+
+
+    // function fn (x, ...y) {
+    //   console.log(x)
+    //   console.log(y)
+    // }
+    // fn(1, 2, 3, 4)
+
+    function fn({ x, ...y }) {
+      console.log(x)
+      console.log(y)
+    }
+    fn({
+      x: 1,
+      a: 1,
+      b: 2
+    })
+
+    // 第一题
+    var fn = function () {
+      console.log(this.name)
+    }
+    var obj1 = {
+      name: '张三'
+    }
+    var obj2 = {
+      name: '李四'
+    }
+    var name = '王五'
+    obj1.fn = fn
+    obj2.fn = fn
+    obj1.fn()
+
+
+    //剪头函数的this 指向的是他的定义的所在定于域。
+    var name = 'window'
+    var obj = {
+      name: 'obj',
+      methods: function () {
+        console.log(this.name)
+      },
+      methods2: () => {
+        console.log(this.name)
+      },
+
+      fn: function (cb) {
+        cb()
+      }
+    }
+    obj.fn1 = function () {
+      obj.fn(() => { console.log(this.name) })
+    }
+    var fn1 = obj.fn1
+    obj.methods()
+    obj.methods2()
+
+    obj.fn(() => { console.log(this.name) })
+    fn1()
+    obj.fn1()
+    // obj2.fn()()
+    // fn()()
+  </script>
+</body>
+
+</html>

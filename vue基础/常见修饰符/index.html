@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+
+        .container .box {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div @click="handleClick1" style="width: 100px; height: 100px; display: flex; background-color: blueviolet;">
+            <div @click="handleClick2" style="width: 20px;height: 30px; background-color:burlywood;"></div>
+        </div>
+        <!-- 阻止冒泡.stop -->
+        <!-- <div class="container" @click="handleClick1">
+            <div class="box" @click.stop="handleClick2"></div>
+        </div> -->
+
+        <!-- 阻止默认的事件.prevent -->
+        <!-- <a href="http://www.baidu.com" @click.prevent="jump">链接</a> -->
+
+        <!-- 捕获阶段触发事件.capture -->
+        <!-- <div class="container" @click.capture="handleClick1">
+            <div class="box" @click="handleClick2"></div>
+        </div> -->
+
+        <!-- self只关注自身事件，冒泡会被忽略 -->
+        <!-- <div class="container" @click.self="handleClick1">
+            <div class="box" @click="handleClick2"></div>
+        </div> -->
+
+        <!-- once所修饰的事件只会触发一次 -->
+        <!-- <div class="container" @click.once="handleClick1"></div> -->
+
+        <!-- 在“change”时而非“input”时更新 -->
+        <!-- <input v-model.lazy="msg" />
+        <br/>
+        <span>msg: {{msg}}</span> -->
+
+        <!-- 将用户的输入值转为数值类型 -->
+        <!-- <input v-model.number="age" />
+        <br/>
+        <span>age类型：{{ typeof age }}</span> -->
+
+        <!-- 过滤用户输入的首尾空白字符 -->
+        message: <input v-model.trim="message" />
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    msg: '',
+                    age: '',
+                    message: ''
+                }
+            },
+            methods: {
+                handleClick1() {
+                    console.log('冒泡的事件')
+                },
+                handleClick2() {
+                    console.log('点击的事件')
+                },
+                jump() {
+                    console.log('跳转事件')
+                }
+            },
+            watch: {
+                message(val) {
+                    console.log(val)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{count}}-{{counts}}
+        <button @click="handleClick">点击</button>
+    </div>
+    
+    <script src="./vue.js"></script>
+    <script src="./vuex.js"></script>
+    <script src="./store.js"></script>
+    <script>
+        const { createApp } = Vue
+        const { mapState  } = Vuex
+        // console.log(Vuex, 'Vuex')
+        const app = createApp({
+            data() {
+                return {}
+            },
+            methods: {
+                handleClick() {
+                    console.log('点击')
+                    store.dispatch('increment')
+                }
+            },
+            computed: {
+                ...mapState(['count']),
+                // count () {
+                //     return store.state.count
+                // },
+                counts () {
+                    return store.getters.counts
+                }
+            }
+        })
+        app.use(store)
+        app.mount('#app')
+        console.log(app.use, 'app')
+        // app.use(store)
+    </script>
+</body>
+</html>

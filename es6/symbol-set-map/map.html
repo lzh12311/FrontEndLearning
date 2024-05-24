@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>map</title>
+</head>
+
+<body>
+  <script>
+    // 对象是 键值对 字符串 -> 值 
+    // const obj1 = {}
+    // const obj2 = {}
+    // const obj = {}
+    // console.log(String(obj2))
+    // console.log(obj1.toString())
+    // // [object Object]
+    // // obj['object Object']
+    // obj[obj1] = '张三'
+    // obj[obj2] = '李四'
+
+    // console.log(obj);
+
+
+
+    // const obj1 = {}
+    // const obj2 = {}
+    // const map = new Map()
+    // // console.log(String(obj2))
+    // // console.log(obj1.toString())
+    // // [object Object]
+    // // obj['object Object']
+    // // obj[obj1] = '张三'
+    // // obj[obj2] = '李四'
+
+    // // console.log(obj);
+
+    // map.set(obj1, '张三')
+    // map.set(obj2, '李四')
+
+    // console.log(map);
+
+    // 
+
+    let map = new Map()
+    console.log(typeof map) // 
+    let res = map instanceof Map
+    let resMap = Object.prototype.toString.call(map)
+    // 是因为 数组和对象 对toString的方法 进行了改写 
+
+    // var obj = {
+    //   toString: function () {
+    //     return '123'
+    //   }
+    // }
+    // obj.toString()
+    let resObj = Object.prototype.toString.call({})
+    console.log(res); // true
+    console.log(resMap); // [object Map]
+    console.log(resObj); // [object Object]
+
+    // 接受数组 表示键值对的数组
+    let obj = { name: '曹操' }
+    let m = new Map(
+      [
+        ['name', '曹操'],
+        [obj, '枭雄']
+      ]
+    )
+    console.log(m.get('name'))
+    console.log(m.get(obj))
+
+    console.log({} == {})
+
+    const items = [
+      ['name', '曹操']
+    ]
+
+    const myMap = new Map()
+    items.forEach(
+      ([key, value], index) => myMap.set(key, value)
+    )
+
+
+
+
+  </script>
+</body>
+
+</html>

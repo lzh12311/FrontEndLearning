@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // function p() {
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve('异步结果')
+    //     }, 1000)
+    //   })
+    // }
+    // function fn() {
+    //   p().then(val => {
+    //     console.log(val)
+    //   })
+    // }
+    // fn()
+    // console.log(p())// 因为Promise 只有调用then的时候才是异步的。
+    // async function fn () {
+    //   const res = await p()
+    //   console.log(res, 'res')
+    // }
+    // fn()
+
+    // async function fn () {
+    //   return 'hello world'
+    //   // 等价
+    //   return Promise.resolve('hello world' )
+    // }
+    // console.log(fn())
+
+    // async function fn () {
+    //   await Promise.reject('出错了')
+    //   console.log(2)
+    // }
+    // fn()
+
+
+    // async function fn() {
+    //   setTimeout(function () {
+    //     console.log(1)
+    //   }, 0)
+    //   Promise.resolve().then(() => console.log(4))
+
+    //   await setTimeout(function () {
+    //     console.log(5)
+    //   }, 0)
+
+    //   // 等价于
+    //   // await Promise.resolve(setTimeout(function () {
+    //   //   console.log(5)
+    //   // }, 0)).then(() => undefined)
+
+    //   await Promise.resolve().then(() => console.log(6))
+    //   Promise.resolve().then(() => console.log(7))
+    //   console.log(3)
+
+    // }
+    // fn()
+    // 4
+    // 6
+    // 3
+    // 7
+    // 1
+    // 5
+
+
+    // async function fn() {
+    //   setTimeout(function () {
+    //     console.log(1)
+    //   }, 0)
+    //   Promise.resolve().then(() => console.log(4))
+    //   await setTimeout(function () {
+    //     console.log(5)
+    //   }, 0)
+    //   await Promise.resolve().then(() => console.log(6))
+    //   Promise.resolve().then(() => console.log(7))
+    //   console.log(3)
+    // }
+    // fn() 
+
+    function fn() {
+      return new Promise((resolve) => {
+        console.log('Promise1')
+        fn1()
+        setTimeout(() => {
+          console.log('Promise2')
+          resolve()
+          console.log('Promise3')
+        }, 0);
+      })
+    }
+    async function fn1() {
+      var p = Promise.resolve().then(() => {
+        console.log('Promise6')
+      })
+      await p.then(() => {
+        console.log('Promise7')
+      })
+      console.log('end')
+    }
+    console.log('script')
+    setTimeout(() => {
+      console.log('setTimeout')
+    }, 0)
+    fn().then(() => {
+      console.log('Promise4')
+    })
+  </script>
+</body>
+
+</html>

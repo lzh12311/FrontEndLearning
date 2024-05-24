@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./vue.js"></script>
+    <div id="app">
+        <a v-bind:href="url">百度</a>
+        <a :href="url">test</a>
+        <input v-on:[eventName]="event" type="text">
+        <button @click="eventname='input'">input</button>
+        <button @click="eventname='change'">change</button>
+        <input v-on:[eventName]="event" type="text">
+        <button @click="eventname = 'input'">input</button>
+        <button @click="eventname = 'change'">change</button>
+        <input type="text"  >
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    attributename: 'a',
+                    url: 'http://www.baidu.com',
+                    eventname: 'input'
+                }
+            },
+            methods: {
+                event() {
+                    console.log('事件被调用')
+                }
+            },
+            computed: {
+                attr() {
+                    return this.attributename + '1'
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>
