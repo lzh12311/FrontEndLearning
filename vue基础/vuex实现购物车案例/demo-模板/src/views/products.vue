@@ -19,15 +19,19 @@
 </template>
 
 <script>
-import { mapState ,mapMutations} from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "ProductList",
   computed: {
-    ...mapState('products',['products'])
+    ...mapState("products", ["products"]),
   },
-  methods:{
-    ...mapMutations('cart',['addToCart'])
-  } 
+  methods: {
+    ...mapMutations("cart", ["addToCart"]),
+  },
+
+  mounted() {
+    console.log(1);
+  },
 };
 </script>
 

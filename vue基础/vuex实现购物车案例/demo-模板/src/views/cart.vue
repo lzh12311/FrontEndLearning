@@ -6,7 +6,7 @@
     </el-breadcrumb>
     <!-- 这里也要写成cartProducts -->
     <el-table
-      :data="[]"
+      :data="cartProducts"
       style="width: 100%"
     >
       <el-table-column
@@ -60,9 +60,21 @@
 </template>
 
 <script>
+import {mapState} from "vuex" 
+
 export default {
   name: 'Cart',
-  computed: {},
+  computed: {
+    ...mapState("cart",["cartProducts"]),
+    checkedAll: {
+      get(){
+        return this.cartProducts.every(prod=> prod.isChecked)
+      },
+      set(){
+
+      }
+    }
+  },
   methods: {}
 }
 </script>

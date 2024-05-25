@@ -17,7 +17,6 @@ export default {
     popCart,
   },
   created() {
-    console.log(this.$store)
     this.$store.dispatch('products/getProducts')
   },
 };
