@@ -6,8 +6,13 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: "/film",
-        component: () => import('../views/film'),
+        component: () => import("../view/FilmView")
     },
+    {
+        path: "*",
+        redirect: "/film" 
+    },
+
 ]
 
 export default new VueRouter ({
