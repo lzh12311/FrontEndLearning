@@ -9,10 +9,18 @@ const routes = [
         component: () => import("../view/FilmView")
     },
     {
+        path: "/account",
+        component: ()=> import ("../view/AccountView")
+    },
+    {
+        path: "/cinema",
+        component: ()=> import ("../view/CinemaView")
+    },
+    {
         path: "*",
         redirect: "/film" 
     },
-
+   
 ]
 
 export default new VueRouter ({
