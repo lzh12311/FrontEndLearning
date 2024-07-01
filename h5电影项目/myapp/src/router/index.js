@@ -6,24 +6,39 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: "/film",
-        component: () => import("../view/FilmView")
+        component: () => import("../view/FilmView"),
+        children: [
+            {
+                path: "/film/nowplaying",
+                component: () => import("../view/film/NowPlaying")
+
+            },
+            {
+                path: "/film/comingsoon",
+                component: () => import("../view/film/ComingSoon")
+            }
+        ]
     },
     {
         path: "/account",
-        component: ()=> import ("../view/AccountView")
+        component: () => import("../view/AccountView")
     },
     {
         path: "/cinema",
-        component: ()=> import ("../view/CinemaView")
+        component: () => import("../view/CinemaView")
+    },
+    {
+        path: "/detail",
+        component: () => import("../view/DetailView")
     },
     {
         path: "*",
-        redirect: "/film" 
+        redirect: "/film"
     },
-   
+
 ]
 
-export default new VueRouter ({
+export default new VueRouter({
     routes,
     mode: "hash"
 })

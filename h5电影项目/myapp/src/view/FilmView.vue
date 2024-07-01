@@ -1,19 +1,24 @@
 <template>
-  <film-swiper>
-    <div class="swiper-slide" v-for="(data, index) in imgList" :key="index">
-      <div
-        class="swiper-img"
-        :style="{ backgroundImage: `url(${data})` }"
-      ></div>
-    </div>
-  </film-swiper>
+  <div>
+    <film-swiper>
+      <div class="swiper-slide" v-for="(data, index) in imgList" :key="index">
+        <div
+          class="swiper-img"
+          :style="{ backgroundImage: `url(${data})` }"
+        ></div>
+      </div>
+    </film-swiper>
+    <film-header></film-header>
+    <router-view> </router-view>
+  </div>
 </template>
 
 <script>
 import FilmSwiper from "../components/FilmSwiper.vue";
+import FilmHeader from "../components/FilmHeader.vue";
 
 export default {
-  components: { FilmSwiper },
+  components: { FilmSwiper, FilmHeader },
   data() {
     return {
       imgList: [
