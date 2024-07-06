@@ -25,7 +25,7 @@ export default {
   },
   mounted() {
     new Swiper("." + this.swiperClass, {
-      slidesPerView: 2,
+      slidesPerView: this.preSlide,
       spaceBetween: 10,
       freeMode: true,
     });

@@ -28,6 +28,10 @@ const routes = [
         component: () => import("../view/CinemaView")
     },
     {
+        path: "/cinema/search",
+        component: () => import("../view/SearchView")
+    },
+    {
         path: "/detail",
         component: () => import("../view/DetailView")
     },

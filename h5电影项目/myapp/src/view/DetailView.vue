@@ -82,8 +82,41 @@
       <div class="actor-title-bar">
         <span class="actor-title-text">演职人员</span>
       </div>
+      <!-- <actor-swiper :perslide="3" swiperclass="swiper-actor">
+        <div
+          class="swiper-slide"
+          style="margin-right: 100px"
+          v-for="data in filmInfo.actors"
+          :key="data.name"
+        >
+          <van-image cover :src="data.avatarAddress" width="85" height="85" />
+          <div class="actors-box">
+            <div class="actors-name">{{ data.name }}</div>
+            <div class="actors-role">{{ data.role }}</div>
+          </div>
+        </div>
+      </actor-swiper> -->
     </div>
-    <actor-swiper :pre-slide="2" swiper-class="swiper-actors">
+    <actor-swiper
+      v-if="filmInfo.photos"
+      style="padding-bottom: 10px"
+      :preSlide="3"
+      swiperclass="swiper-actors"
+    >
+      <div
+        class="swiper-slide"
+        v-for="(data, index) in filmInfo.actors"
+        :key="index"
+        @click="handleImagePreview(index)"
+      >
+        <van-image cover :src="data.avatarAddress" width="85" height="85" />
+        <div class="actors-box">
+          <div class="actors-name">{{ data.name }}</div>
+          <div class="actors-role">{{ data.role }}</div>
+        </div>
+      </div>
+    </actor-swiper>
+    <!-- <actor-swiper :pre-slide="2" swiper-class="swiper-actors">
       <div
         class="swiper-slide"
         v-for="data in filmInfo.actors"
@@ -97,7 +130,8 @@
           </div>
         </div>
       </div>
-    </actor-swiper>
+    </actor-swiper> -->
+
     <div class="figures">
       <div class="figure-title-bar">
         <span class="figure-title-text"> 剧集照片 </span>
@@ -105,7 +139,7 @@
       <actor-swiper
         v-if="filmInfo.photos"
         style="padding-bottom: 10px"
-        :perslide="3"
+        :preSlide="3"
         swiperclass="swiper-photos"
       >
         <div
