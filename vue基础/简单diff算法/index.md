@@ -42,7 +42,7 @@ function patchChildren(n1, n2) {
 }
 </code>
 </pre>
-</details>
+</details>  
 
 #### 如果节点的个数对不上怎么解决？
 ![虚拟节点](./01.png)

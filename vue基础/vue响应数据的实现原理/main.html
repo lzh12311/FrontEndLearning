@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="h1"></h1>
+</body>
+<script>
+    const data = { text: "123" };
+    function effecgt() {
+        document.body.innerText = obj.text;
+    }
+    const buckt = new Set();
+
+    const obj = new Proxy(data, {
+        get(target, key) {
+            buckt.add(effecgt);
+            return target[key]
+        },
+        set(target, key, newValue) {
+            target[key] = newValue;
+            buckt.forEach(fn => fn())
+            return true;
+        }
+    })
+
+    effecgt()
+
+    setTimeout(() => {
+        obj.text = "updated";
+    }, 1000)
+
+</script>
+
+</html>
