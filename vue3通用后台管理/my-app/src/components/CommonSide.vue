@@ -1,8 +1,5 @@
 <template>
-  <el-menu
-    default-active="2"
-    class="el-menu-vertical-demo"
-  >
+  <el-menu default-active="2" class="el-menu-vertical-demo">
     <el-menu-item
       v-for="item in noChildren"
       :index="item.path"
@@ -86,4 +83,9 @@ const hasChildren = computed(() => list.value.filter((item) => item.children));
 </script>
 
 <style lang="less" scoped>
+.icons {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+}
 </style>
