@@ -1,10 +1,11 @@
 <template>
   <div class="common-layout">
     <el-container class="container-outside">
-      <!-- <el-aside class="aside">Aside</el-aside> -->
       <common-aside />
       <el-container class="container-inside">
-        <el-header class="header">Header</el-header>
+        <el-header class="el-header">
+          <common-header />
+        </el-header>
         <el-main class="main-inside">Main</el-main>
       </el-container>
     </el-container>
@@ -13,6 +14,7 @@
 
 <script setup>
 import CommonAside from "../components/CommonSide.vue";
+import CommonHeader from "../components/CommonHeader.vue";
 </script>
 
 <style lang="less" scoped>
@@ -21,6 +23,10 @@ import CommonAside from "../components/CommonSide.vue";
 }
 .container-outside {
   height: 100%;
+}
+.el-header {
+  width: 100%;
+  padding: 0px;
 }
 .header {
   background-color: black;
