@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="l-content">
-      <el-button size="small">
+      <el-button size="small" @click="handleCollapse">
         <component class="icons" :is="menu"></component>
       </el-button>
       <el-breadcrumb separator="/" class="bread">
@@ -27,9 +27,17 @@
 
 <script setup>
 import { ref } from "vue";
+import { useAllDataStore } from "../store";
+
 const menu = ref("menu");
+const store = useAllDataStore();
 const getImageUrl = (user) => {
   return new URL(`../assets/images/${user}.png`, import.meta.url).href;
+};
+
+const handleCollapse = () => {
+  store.state.isCollapse = !store.state.isCollapse;
+  console.log(store.state.isCollapse);
 };
 </script>
 

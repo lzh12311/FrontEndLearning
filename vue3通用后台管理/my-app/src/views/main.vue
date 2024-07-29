@@ -6,7 +6,9 @@
         <el-header class="el-header">
           <common-header />
         </el-header>
-        <el-main class="main-inside">Main</el-main>
+        <el-main class="main-inside">
+          <router-view></router-view>
+        </el-main>
       </el-container>
     </el-container>
   </div>
