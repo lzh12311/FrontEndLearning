@@ -33,4 +33,7 @@ import CommonHeader from "../components/CommonHeader.vue";
 .header {
   background-color: black;
 }
+.main-inside {
+  min-width: 2200px;
+}
 </style>

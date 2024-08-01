@@ -20,8 +20,12 @@
       </el-card>
 
       <el-table :data="tableData">
-        <el-table-column v-for="(val, key) in tableLabel" :key="key" :label="val" :prop="key">
-            
+        <el-table-column
+          v-for="(val, key) in tableLabel"
+          :key="key"
+          :label="val"
+          :prop="key"
+        >
         </el-table-column>
       </el-table>
     </el-col>
@@ -50,6 +54,17 @@ const tableLabel = Vue.ref({
   todayBuy: "今日购买",
   monthBuy: "本月购买",
   totalBuy: "总购买",
+});
+
+const { proxy } = Vue.getCurrentInstance();
+
+const getTableData = async () => {
+  const data = await proxy.$api.getTableData();
+  console.log(data);
+};
+
+Vue.onMounted(() => {
+  getTableData();
 });
 </script>
 
