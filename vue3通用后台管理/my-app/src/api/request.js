@@ -1,7 +1,10 @@
 import axios from "axios";
 import { ElMessage } from 'element-plus'
-
-const service = axios.create();
+import config from "@/config";
+const service = axios.create({
+    baseURL: config.baseApi,
+}
+);
 
 const netError = "Network error";
 service.interceptors.request.use(
@@ -30,6 +33,19 @@ service.interceptors.response.use(
 
 function request(option) {
     option.method = "get";
+    if (option.method.toLowerCase() === "get") {
+        option.params = option.data;
+    }
+    let isMock = config.mock;
+    if (typeof option.mock !== "undefined") {
+        isMock === option.mock;
+    }
+
+    if (config.env === "prod") {
+        service.defaults.baseURL = config.baseApi;
+    } else {
+        service.defaults.baseURL = isMock ? config.mockApi : config.baseApi;
+    }
     return service(option);
 }
 

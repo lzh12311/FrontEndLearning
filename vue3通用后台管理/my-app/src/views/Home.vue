@@ -56,15 +56,25 @@ const tableLabel = Vue.ref({
   totalBuy: "总购买",
 });
 
+const courtData = Vue.ref([]);
+
 const { proxy } = Vue.getCurrentInstance();
 
 const getTableData = async () => {
   const data = await proxy.$api.getTableData();
+  tableData.value = data.tableData;
+  console.log(data);
+};
+
+const getCountData = async () => {
+  const data = await proxy.$api.getCountData();
+  courtData.value = data.tableData;
   console.log(data);
 };
 
 Vue.onMounted(() => {
   getTableData();
+  getCountData();
 });
 </script>
 
