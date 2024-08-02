@@ -1,37 +1,3 @@
-<template>
-  <el-row class="home" :gutter="20">
-    <el-col :span="8" style="margin-top: 20px">
-      <el-card>
-        <div class="user">
-          <img src="../assets/images/user.png" alt="" />
-          <p>Admin</p>
-          <p>超级管理员</p>
-        </div>
-        <div class="user-info">
-          <p>
-            Address :
-            <span>Australian </span>
-          </p>
-          <p>
-            Last time Login :
-            <span> 2024-04 </span>
-          </p>
-        </div>
-      </el-card>
-
-      <el-table :data="tableData">
-        <el-table-column
-          v-for="(val, key) in tableLabel"
-          :key="key"
-          :label="val"
-          :prop="key"
-        >
-        </el-table-column>
-      </el-table>
-    </el-col>
-  </el-row>
-</template>
-
 <script setup>
 import * as Vue from "vue";
 const tableData = Vue.ref([
@@ -57,7 +23,11 @@ const tableLabel = Vue.ref({
 });
 
 const courtData = Vue.ref([]);
+const chartData = Vue.ref([]);
 
+const getImageUrl = (user) => {
+  return new URL(`../assets/images/${user}.png`, import.meta.url).href;
+};
 const { proxy } = Vue.getCurrentInstance();
 
 const getTableData = async () => {
@@ -68,39 +38,143 @@ const getTableData = async () => {
 
 const getCountData = async () => {
   const data = await proxy.$api.getCountData();
-  courtData.value = data.tableData;
+  courtData.value = data;
+  console.log(data);
+};
+
+const getChartData = async () => {
+  const data = await proxy.$api.getChartData();
+  chartData.value = data;
   console.log(data);
 };
 
 Vue.onMounted(() => {
   getTableData();
   getCountData();
+  getChartData();
 });
 </script>
 
+<template>
+  <el-row :gutter="20" class="container">
+    <el-col :span="8" style="margin-top: 20px">
+      <el-card>
+        <div class="user-info">
+          <img :src="getImageUrl('user')" alt="user-pic" class="user-photo" />
+          <div class="user-name-role">
+            <p style="font-size: 35px; color: black; margin-bottom: 12px">
+              Admin
+            </p>
+            <p style="color: grey; line-height: 40px">超级管理员</p>
+          </div>
+        </div>
+        <div class="login-info">
+          <div class="login-time">
+            <p>上次登录时间：</p>
+            <p style="margin-left: 40px">2024-06-30</p>
+          </div>
+          <div class="login-time">
+            <p>上次登录时间：</p>
+            <p style="margin-left: 40px">2024-06-30</p>
+          </div>
+        </div>
+      </el-card>
+      <el-table :data="tableData" class="user-table">
+        <el-table-column
+          v-for="(val, key) in tableLabel"
+          :key="key"
+          :prop="key"
+          :label="val"
+        />
+      </el-table>
+    </el-col>
+    <el-col :span="16">
+      <div class="user-card">
+        <el-card
+          v-for="item in courtData"
+          :key="item.name"
+          :body-style="{ display: 'flex', padding: 0 }"
+        >
+          <div class="card-inside">
+            <component
+              :is="item.icon"
+              class="card-icon"
+              :style="{ background: item.color }"
+            ></component>
+            <div class="card-number">
+              <p style="font-size: 32px; margin-bottom: 12px">
+                $ {{ item.value }}
+              </p>
+              <p style="line-height: 15px; color: #666">$ {{ item.name }}</p>
+            </div>
+          </div>
+        </el-card>
+      </div>
+    </el-col>
+  </el-row>
+</template>
 <style lang="less" scoped>
-.user {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid black;
-  padding-bottom: 8px;
-
-  img {
-    width: 100px;
-    height: 100px;
-    margin-right: 20px;
-    border-radius: 50%;
+.container {
+  height: 100%;
+  overflow: hidden;
+  .user-info {
+    display: flex;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid grey;
+    .user-photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-right: 40px;
+    }
+    .user-name-role {
+      display: flex;
+      flex-direction: column;
+    }
   }
-}
-.user-info {
-  margin-top: 12px;
-  p {
-    color: grey;
-    font-size: 16px;
-    line-height: 30px;
-    span {
-      color: blue;
-      font-size: 16px;
+  .login-info {
+    .login-time {
+      display: flex;
+      margin-top: 24px;
+      p {
+        line-height: 30px;
+        font-size: 14px;
+        color: #999;
+        span {
+          color: #666;
+          margin-left: 60px;
+        }
+      }
+    }
+  }
+  .user-table {
+    margin-top: 24px;
+  }
+  .user-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    .el-card {
+      width: 32%;
+      margin-bottom: 20px;
+    }
+    .card-icon {
+      width: 80px;
+      height: 80px;
+      color: #fff;
+    }
+    .card-inside {
+      display: flex;
+      align-items: center;
+      .card-number {
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+        line-height: 30px;
+      }
     }
   }
 }

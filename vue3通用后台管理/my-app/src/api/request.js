@@ -27,7 +27,7 @@ service.interceptors.response.use(
         } else {
             ElMessage.error(msg || netError);
             return Promise.reject(msg || netError);
-        }
+        }   
     }
 );
 
@@ -38,7 +38,7 @@ function request(option) {
     }
     let isMock = config.mock;
     if (typeof option.mock !== "undefined") {
-        isMock === option.mock;
+        isMock = option.mock;
     }
 
     if (config.env === "prod") {
