@@ -1,5 +1,7 @@
 <script setup>
 import * as Vue from "vue";
+import * as echarts from "echarts";
+
 const tableData = Vue.ref([
   {
     name: "Java",
@@ -25,6 +27,63 @@ const tableLabel = Vue.ref({
 const courtData = Vue.ref([]);
 const chartData = Vue.ref([]);
 
+const xOptions = Vue.reactive({
+  // 图例文字颜色
+  textStyle: {
+    color: "#333",
+  },
+  legend: {},
+  grid: {
+    left: "20%",
+  },
+  // 提示框
+  tooltip: {
+    trigger: "axis",
+  },
+  xAxis: {
+    type: "category", // 类目轴
+    data: [],
+    axisLine: {
+      lineStyle: {
+        color: "#17b3a3",
+      },
+    },
+    axisLabel: {
+      interval: 0,
+      color: "#333",
+    },
+  },
+  yAxis: [
+    {
+      type: "value",
+      axisLine: {
+        lineStyle: {
+          color: "#17b3a3",
+        },
+      },
+    },
+  ],
+  color: ["#2ec7c9", "#b6a2de", "#5ab1ef", "#ffb980", "#d87a80", "#8d98b3"],
+  series: [],
+});
+
+const pieOptions = Vue.reactive({
+  tooltip: {
+    trigger: "item",
+  },
+  legend: {},
+  color: [
+    "#0f78f4",
+    "#dd536b",
+    "#9462e5",
+    "#a6a6a6",
+    "#e1bb22",
+    "#39c362",
+    "#3ed1cf",
+  ],
+  series: [],
+});
+
 const getImageUrl = (user) => {
   return new URL(`../assets/images/${user}.png`, import.meta.url).href;
 };
@@ -43,9 +102,64 @@ const getCountData = async () => {
 };
 
 const getChartData = async () => {
-  const data = await proxy.$api.getChartData();
-  chartData.value = data;
-  console.log(data);
+  const { orderData, userData, videoData } = await proxy.$api.getChartData();
+  chartData.value = orderData;
+
+  xOptions.xAxis.data = orderData.date;
+  console.log(orderData);
+  xOptions.series = Object.keys(orderData.data[0]).map((val) => {
+    return {
+      name: val,
+      data: orderData.data.map((item) => item[val]),
+      type: "line",
+    };
+  });
+  const firstChart = echarts.init(proxy.$refs["echart-line"]);
+  firstChart.setOption(xOptions);
+
+  const secondChart = echarts.init(proxy.$refs["echart-bar"]);
+  xOptions.xAxis.data = userData.map((item) => {
+    return item.date;
+  });
+
+  xOptions.series = [
+    {
+      name: "新增用户",
+      data: userData.map((item) => item.new),
+      type: "bar",
+    },
+    {
+      name: "活跃用户",
+      data: userData.map((item) => item.active),
+      type: "bar",
+    },
+  ];
+  secondChart.setOption(xOptions);
+
+  pieOptions.series = [
+    {
+      data: videoData.map((item) => {
+        return {
+          value: item.value,
+          name: item.name,
+        };
+      }),
+      type: "pie",
+    },
+  ];
+  const pieChart = echarts.init(proxy.$refs["echart-pie"]);
+  pieChart.setOption(pieOptions);
+
+  const observe = Vue.ref(null);
+  observe.value = new ResizeObserver((entry) => {
+    firstChart.resize();
+    secondChart.resize();
+    pieChart.resize();
+  });
+  if (proxy.$refs["echart-line"]) {
+    console.log(123);
+    observe.value.observe(proxy.$refs["echart-line"]);
+  }
 };
 
 Vue.onMounted(() => {
@@ -108,6 +222,17 @@ Vue.onMounted(() => {
               <p style="line-height: 15px; color: #666">$ {{ item.name }}</p>
             </div>
           </div>
+        </el-card>
+      </div>
+      <el-card class="top-echart">
+        <div ref="echart-line" style="height: 280px"></div>
+      </el-card>
+      <div class="barPieChart">
+        <el-card class="bar-echart">
+          <div ref="echart-bar" style="height: 280px"></div>
+        </el-card>
+        <el-card class="pie-echart">
+          <div ref="echart-pie" style="height: 280px"></div>
         </el-card>
       </div>
     </el-col>
@@ -175,6 +300,15 @@ Vue.onMounted(() => {
         margin-left: 20px;
         line-height: 30px;
       }
+    }
+  }
+  .barPieChart {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    .el-card {
+      width: 48%;
+      height: 300px;
     }
   }
 }
