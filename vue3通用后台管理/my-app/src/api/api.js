@@ -19,5 +19,12 @@ export default {
             url: "/home/getChartData",
             method: "get"
         })
-    }
+    },
+    getUserData(data) {
+        return request({
+            url: "/home/getUserData",
+            method: "get",
+            data
+        })
+    },
 };

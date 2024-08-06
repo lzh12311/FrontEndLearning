@@ -11,6 +11,7 @@
         v-for="item in noChildren"
         :index="item.path"
         :key="item.path"
+        @click="handleMenu(item)"
       >
         <component class="icons" :is="item.icon"></component>
         <span>{{ item.label }}</span>
@@ -29,6 +30,7 @@
             v-for="subItem in item.children"
             :index="subItem.path"
             :key="subItem.path"
+            @click="handleMenu(item)"
           >
             <component class="icons" :is="subItem.icon"></component>
             <span>{{ subItem.label }}</span>
@@ -42,6 +44,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { useAllDataStore } from "../store";
+import { useRouter, useRoute } from "vue-router";
 
 const list = ref([
   {
@@ -89,7 +92,8 @@ const list = ref([
 ]);
 
 const store = useAllDataStore();
-
+const router = useRouter();
+const route = useRoute();
 const isCollapse = computed(() => store.state.isCollapse);
 const noChildren = computed(() => list.value.filter((item) => !item.children));
 const hasChildren = computed(() => list.value.filter((item) => item.children));
@@ -97,6 +101,9 @@ const width = computed(() => (store.state.isCollapse ? "64px" : "180px"));
 onMounted(() => {
   console.log(isCollapse);
 });
+const handleMenu = (item) => {
+  router.push(item.path);
+};
 </script>
 
 <style lang="less" scoped>
