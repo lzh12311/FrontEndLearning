@@ -1,6 +1,6 @@
 <script setup>
 import * as Vue from "vue";
-import { onMounted } from "vue";
+import { ElMessage, ElMessageBox } from "element-plus";
 
 const tableData = Vue.ref(null);
 
@@ -54,7 +54,25 @@ const handleChange = (page) => {
   getUserList(config);
 };
 
-onMounted(() => {
+const deleteUser = async (data) => {
+  const result = await proxy.$api.deleteUser(data);
+  console.log(result);
+  getUserList(config);
+
+  //   console.log(result);
+  //   ElMessageBox.confirm("你确定要删除吗?").then(async () => {
+  //     const data1 = await proxy.$api.deleteUser({ id: data.id });
+  //     console.log(data1);
+  //     ElMessage({
+  //       showClose: true,
+  //       message: "删除成功",
+  //       type: "success",
+  //     });
+  //     getUserList(config);
+  //   });
+};
+
+Vue.onMounted(() => {
   getUserList(config);
 });
 </script>
@@ -85,9 +103,21 @@ onMounted(() => {
         </el-table-column
         >`
         <el-table-column fixed="right" label="操作" min-width="120">
-          <template #default>
-            <el-button type="primary" size="small"> 移除 </el-button>
-            <el-button type="primary" size="small"> 移除 </el-button>
+          <template #="scope">
+            <el-button
+              type="primary"
+              size="small"
+              @click="deleteUser(scope.row)"
+            >
+              edit
+            </el-button>
+            <el-button
+              type="primary"
+              size="small"
+              @click="deleteUser(scope.row)"
+            >
+              移除
+            </el-button>
           </template>
         </el-table-column>
       </el-table>

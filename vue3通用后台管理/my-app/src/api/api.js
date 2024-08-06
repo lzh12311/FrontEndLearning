@@ -27,4 +27,19 @@ export default {
             data
         })
     },
+    deleteUser(data) {
+        console.log(data);
+        return request({
+            url: "/user/deleteUser",
+            method: "get",
+            data,
+        });
+    },
+    addUser(data) {
+        return request({
+          url: "/user/addUser",
+          method: "post",
+          data,
+        });
+      },
 };

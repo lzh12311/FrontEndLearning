@@ -68,7 +68,7 @@ export default {
      */
     deleteUser: (config) => {
         const { id } = param2Obj(config.url);
-
+        console.log(id)
         if (!id) {
             return {
                 code: -999,
