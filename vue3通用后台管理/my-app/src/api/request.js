@@ -27,12 +27,12 @@ service.interceptors.response.use(
         } else {
             ElMessage.error(msg || netError);
             return Promise.reject(msg || netError);
-        }   
+        }
     }
 );
 
 function request(option) {
-    option.method = "get";
+    option.method = option.method || "get";
     if (option.method.toLowerCase() === "get") {
         option.params = option.data;
     }
