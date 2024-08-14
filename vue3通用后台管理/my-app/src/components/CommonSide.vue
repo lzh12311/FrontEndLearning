@@ -94,15 +94,19 @@ const list = ref([
 const store = useAllDataStore();
 const router = useRouter();
 const route = useRoute();
+
 const isCollapse = computed(() => store.state.isCollapse);
 const noChildren = computed(() => list.value.filter((item) => !item.children));
 const hasChildren = computed(() => list.value.filter((item) => item.children));
 const width = computed(() => (store.state.isCollapse ? "64px" : "180px"));
+
 onMounted(() => {
   console.log(isCollapse);
 });
+
 const handleMenu = (item) => {
   router.push(item.path);
+  store.selectMenu(item);
 };
 </script>
 

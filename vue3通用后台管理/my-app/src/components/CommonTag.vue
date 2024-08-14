@@ -1,12 +1,12 @@
 <template>
   <div class="tag">
     <el-tag
-      v-for="(tag, index) in tag"
+      v-for="tag in tags"
       :key="tag.name"
       :closable="tag.name !== 'home'"
       :effect="route.name === tag.name ? 'dark' : 'plain'"
     >
-      {{ tag.lable }}
+      {{ tag.label }}
     </el-tag>
   </div>
 </template>
@@ -14,15 +14,15 @@
 <script setup>
 import * as Vue from "vue";
 import { useRoute } from "vue-router";
-const tag = Vue.ref([
-  {
-    path: "user",
-    name: "home",
-    lable: "home",
-    icon: "home",
-  },
-]);
+import { useAllDataStore } from "../store";
 
+const store = useAllDataStore();
+
+const tags = Vue.computed(() => store.state.tags);
+
+Vue.onMounted(() => {
+  console.log(tags.value.map((item) => console.log(item.label)));
+});
 const route = useRoute();
 </script>
 
@@ -30,5 +30,8 @@ const route = useRoute();
 .tag {
   padding-left: 20px;
   padding-top: 20px;
+}
+.el-tag {
+  margin-right: 10px;
 }
 </style>
