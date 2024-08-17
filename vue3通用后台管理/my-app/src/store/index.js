@@ -14,7 +14,8 @@ function initState() {
         ],
         // currentMenu: null,
         menuList: [],
-        token: ""
+        token: "",
+        routerLink: []
     }
 };
 
@@ -22,6 +23,28 @@ export const useAllDataStore = defineStore("allData", () => {
 
     const state = ref(initState());
 
+    function addMenu(router) {
+        const menu = state.value.menuList;
+        const module = import.meta.glob("../views/**/*.vue");
+        const routeArr = []
+        menu.forEach(item => {
+            if (item.children) {
+                item.children.forEach(val => {
+                    console.log(val)
+                    let url = `../views/${val.url}.vue`;
+                    val.component = module[url];
+                    routeArr.push(...item.children)
+                })
+            } else {
+                let url = `../views/${item.url}.vue`;
+                item.component = module[url];
+                routeArr.push(item)
+            }
+        })
+        routeArr.forEach(item => {
+            state.value.routerLink.push(router.addRoute("main", item));
+        })
+    }
     function selectMenu(val) {
         if (val.name === "home") {
             // currentMenu = null;
@@ -42,6 +65,7 @@ export const useAllDataStore = defineStore("allData", () => {
 
     return {
         state,
+        addMenu,
         selectMenu,
         updateMenu,
         updateMenuList

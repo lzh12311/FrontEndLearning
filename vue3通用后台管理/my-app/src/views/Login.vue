@@ -40,6 +40,7 @@ const login = async () => {
     //直接修改token
     store.state.token = res.token;
     router.push("/home");
+    store.addMenu(router);
   }
 };
 </script>

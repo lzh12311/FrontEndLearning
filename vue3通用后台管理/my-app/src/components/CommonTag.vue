@@ -5,7 +5,7 @@
       :key="tag.name"
       :closable="tag.name !== 'home'"
       :effect="route.name === tag.name ? 'dark' : 'plain'"
-      @click="handleCilck"
+      @click="handleCilck(tag)"
       @close="handleClose(tag, index)"
     >
       {{ tag.label }}
