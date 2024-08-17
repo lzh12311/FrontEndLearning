@@ -39,3 +39,4 @@ import CommonTag from "../components/CommonTag.vue";
   min-width: 1200px;
 }
 </style>
+
