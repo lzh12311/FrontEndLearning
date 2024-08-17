@@ -66,12 +66,6 @@ const deleteUser = async (data) => {
   });
 };
 
-const addUser = async (data) => {
-  const data1 = await proxy.$api.addUser(data);
-
-  getUserList(config);
-};
-
 Vue.onMounted(() => {
   getUserList(config);
 });

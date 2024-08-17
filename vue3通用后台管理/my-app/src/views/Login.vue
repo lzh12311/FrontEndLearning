@@ -3,7 +3,7 @@
     <el-form :model="loginForm" class="login-form">
       <h1>Login</h1>
       <el-form-item prop="name">
-        <el-input v-model="loginForm.name" placeholder="请输入Account" />
+        <el-input v-model="loginForm.username" placeholder="请输入Account" />
       </el-form-item>
 
       <el-form-item prop="pwd">
@@ -11,8 +11,8 @@
       </el-form-item>
       <el-form-item>
         <div class="button-div">
-          <el-button type="primary" @click="handleCancel">取消</el-button>
-          <el-button type="primary" @click="onSubmit">确定</el-button>
+          <!-- <el-button type="primary" @click="handleCancel">取消</el-button> -->
+          <el-button type="primary" @click="login">确定</el-button>
         </div>
       </el-form-item>
     </el-form>
@@ -21,11 +21,27 @@
 
 <script setup>
 import * as Vue from "vue";
+import { useAllDataStore } from "../store";
+import { useRouter, useRoute } from "vue-router";
 
+const store = useAllDataStore();
+const { proxy } = Vue.getCurrentInstance();
+const router = useRouter();
 const loginForm = Vue.reactive({
-  name: "",
+  username: "",
   password: "",
 });
+
+const login = async () => {
+  const res = await proxy.$api.getMenu(loginForm);
+  if (res) {
+    //在这里执行updateMenuList，传入res.menuList
+    store.updateMenuList(res.menuList);
+    //直接修改token
+    store.state.token = res.token;
+    router.push("/home");
+  }
+};
 </script>
 
 <style lang="less" scoped>
