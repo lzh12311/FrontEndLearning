@@ -39,8 +39,8 @@ const login = async () => {
     store.updateMenuList(res.menuList);
     //直接修改token
     store.state.token = res.token;
+    store.addMenu(router,"");
     router.push("/home");
-    store.addMenu(router);
   }
 };
 </script>

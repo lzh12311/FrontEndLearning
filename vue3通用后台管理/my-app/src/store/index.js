@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, watch } from "vue";
+import * as Vue from "vue";
 
 function initState() {
     return {
@@ -15,15 +15,32 @@ function initState() {
         // currentMenu: null,
         menuList: [],
         token: "",
-        routerLink: []
+        routerLink: [],
     }
 };
 
 export const useAllDataStore = defineStore("allData", () => {
 
-    const state = ref(initState());
+    const state = Vue.ref(initState());
+    Vue.watch(
+        state,
+        (newObj) => {
+            if (!newObj.token) return;
+            localStorage.setItem("store", JSON.stringify(newObj));
+        },
+        { deep: true }
+    );
 
-    function addMenu(router) {
+
+    function addMenu(router, type) {
+        if (type === "refresh") {
+            if (JSON.parse(localStorage.getItem("store"))) {
+                state.value = JSON.parse(localStorage.getItem("store"));
+                state.value.routerList = [];
+            } else {
+                return;
+            }
+        }
         const menu = state.value.menuList;
         const module = import.meta.glob("../views/**/*.vue");
         const routeArr = []
@@ -33,7 +50,7 @@ export const useAllDataStore = defineStore("allData", () => {
                     console.log(val)
                     let url = `../views/${val.url}.vue`;
                     val.component = module[url];
-                    routeArr.push(...item.children)
+                    routeArr.push(val)
                 })
             } else {
                 let url = `../views/${item.url}.vue`;
@@ -45,6 +62,7 @@ export const useAllDataStore = defineStore("allData", () => {
             state.value.routerLink.push(router.addRoute("main", item));
         })
     }
+
     function selectMenu(val) {
         if (val.name === "home") {
             // currentMenu = null;
