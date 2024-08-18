@@ -1,0 +1,15 @@
+{
+  "name": "@mobili-coffee/fc-detail-form-panel",
+  "version": "0.1.2",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.fuchuang-auto.com:frontend/mobili/mobili-coffee.git"
+  },
+  "dependencies": {
+    "@fc/mobili-pizza": "^0.0.1",
+    "vue": "2.6.12"
+  }
+}

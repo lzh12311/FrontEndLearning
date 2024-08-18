@@ -1,0 +1,16 @@
+{
+  "name": "@mobili-coffee/fc-records",
+  "version": "0.0.4",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.fuchuang-auto.com:frontend/mobili/mobili-coffee.git"
+  },
+  "dependencies": {
+    "dayjs": "^1.10.4",
+    "@fc/mobili-pizza": "^0.0.1",
+    "vue": "2.6.12"
+  }
+}

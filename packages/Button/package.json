@@ -1,0 +1,11 @@
+{
+  "name": "@mobili-coffee/button",
+  "version": "0.1.2",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.fuchuang-auto.com:frontend/mobili/mobili-coffee.git"
+  }
+}

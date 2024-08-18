@@ -1,0 +1,14 @@
+{
+  "packages": [
+    "packages/*"
+  ],
+  "version": "independent",
+  "command": {
+    "publish": {
+      "allowBranch": "master",
+      "message": "chore(publish): 🤖update packages",
+      "registry": "https://maven.fuchuang-auto.com/repository/npm-local",
+      "conventionalCommits": true
+    }
+  }
+}

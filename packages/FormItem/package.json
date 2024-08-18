@@ -1,0 +1,16 @@
+{
+  "name": "@mobili-coffee/form-item",
+  "version": "0.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.fuchuang-auto.com:frontend/mobili/mobili-coffee.git"
+  },
+  "dependencies": {
+    "@fc/mobili-pizza": "^0.0.1",
+    "vue": "2.6.12",
+    "vue-loader": "^15.9.6"
+  }
+}

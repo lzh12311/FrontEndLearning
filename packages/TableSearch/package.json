@@ -1,0 +1,17 @@
+{
+	"name": "@mobili-coffee/table-search",
+	"version": "0.0.0",
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.fuchuang-auto.com:frontend/mobili/mobili-coffee.git"
+	},
+	"dependencies": {
+		"element-ui": "2.15.3",
+		"vue": "2.6.12",
+		"vue-loader": "15.9.6"
+	},
+	"gitHead": "510d71f11be01563558ce1cf500d8f832014c107"
+}
